@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Bramantio Galih Arintoko</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="project">
+
+<header class="site-header">
+  <nav class="navbar wrap">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="profile.html" data-page="profile">Profile</a></li>
+      <li><a href="project.html" data-page="project">Project</a></li>
+      <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="section wrap" style="padding-top:20px;">
+    <div class="section-head">
+      <h2>Projects</h2>
+    </div>
+    <div class="grid-3" id="all-projects"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <a href="contact.html">Say hello →</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const grid = document.getElementById("all-projects");
+  PROJECTS.forEach((p) => {
+    grid.innerHTML += `
+      <a class="card" href="project-detail.html?id=${p.id}">
+        <div class="card-media"><img src="${p.cover}" alt="${p.name}" /></div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="card-stack">${p.stack}</p>
+        </div>
+      </a>`;
+  });
+</script>
+</body>
+</html>

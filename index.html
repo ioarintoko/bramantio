@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bramantio Galih Arintoko — Full Stack Developer</title>
+<meta name="description" content="Portfolio of Bramantio Galih Arintoko, a full stack developer working across Go, PHP, and React." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+
+<header class="site-header">
+  <nav class="navbar wrap">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="profile.html" data-page="profile">Profile</a></li>
+      <li><a href="project.html" data-page="project">Project</a></li>
+      <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div class="eyebrow-name">
+        <h1><span class="accent">Bram</span>antio Galih<br />Arintoko</h1>
+        <p class="tagline">your nice and sweet<br /><b>Full Stack Developer</b> neighbor</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="project.html">See my projects</a>
+          <a class="btn btn-outline" href="contact.html">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="assets/dark/home-hero.png" alt="" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Selected projects</h2>
+      <a class="see-all" href="project.html">See all &rarr;</a>
+    </div>
+    <div class="grid-3" id="home-projects"></div>
+  </section>
+
+  <section class="section wrap">
+    <div class="section-head">
+      <h2>Latest articles</h2>
+      <a class="see-all" href="article.html">See all &rarr;</a>
+    </div>
+    <div class="article-list" id="home-articles"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <a href="contact.html">Say hello →</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const homeProjects = document.getElementById("home-projects");
+  PROJECTS.slice(0, 3).forEach((p) => {
+    homeProjects.innerHTML += `
+      <a class="card" href="project-detail.html?id=${p.id}">
+        <div class="card-media"><img src="${p.cover}" alt="${p.name}" /></div>
+        <div class="card-body">
+          <h3>${p.name}</h3>
+          <p class="card-stack">${p.stack}</p>
+        </div>
+      </a>`;
+  });
+
+  const homeArticles = document.getElementById("home-articles");
+  ARTICLES.slice(0, 2).forEach((a) => {
+    homeArticles.innerHTML += `
+      <a class="article-row" href="article-detail.html?id=${a.id}">
+        <div class="thumb"><img src="${a.thumb}" alt="" /></div>
+        <div class="content">
+          <span class="date">${a.date}</span>
+          <h3>${a.title}</h3>
+          <p class="excerpt">${a.excerpt}</p>
+        </div>
+      </a>`;
+  });
+</script>
+</body>
+</html>

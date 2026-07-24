@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — Bramantio Galih Arintoko</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="contact">
+
+<header class="site-header">
+  <nav class="navbar wrap">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="profile.html" data-page="profile">Profile</a></li>
+      <li><a href="project.html" data-page="project">Project</a></li>
+      <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="section wrap" style="padding-top:20px;">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Let's talk</h2>
+        <p>Open to new roles and collaboration — reach out through the form or any channel below.</p>
+        <div class="contact-channels">
+          <a href="mailto:hello@bramant.io">✉️ hello@bramant.io</a>
+          <a href="https://github.com/" target="_blank" rel="noopener">🐙 GitHub</a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener">💼 LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <form id="contact-form" onsubmit="return handleContactSubmit(event)">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" required placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" required placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" required placeholder="What would you like to talk about?"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+
+        <div id="contact-success" class="success-state hidden">
+          <div class="icon">✓</div>
+          <h3>Message sent</h3>
+          <p>Thanks for reaching out — I'll get back to you soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <a href="contact.html">Say hello →</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

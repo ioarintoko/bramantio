@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Articles — Bramantio Galih Arintoko</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="article">
+
+<header class="site-header">
+  <nav class="navbar wrap">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="profile.html" data-page="profile">Profile</a></li>
+      <li><a href="project.html" data-page="project">Project</a></li>
+      <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="section wrap" style="padding-top:20px;">
+    <div class="section-head">
+      <h2>Articles</h2>
+    </div>
+    <div class="article-list" id="all-articles"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <a href="contact.html">Say hello →</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const list = document.getElementById("all-articles");
+  ARTICLES.forEach((a) => {
+    list.innerHTML += `
+      <a class="article-row" href="article-detail.html?id=${a.id}">
+        <div class="thumb"><img src="${a.thumb}" alt="" /></div>
+        <div class="content">
+          <span class="date">${a.date}</span>
+          <h3>${a.title}</h3>
+          <p class="excerpt">${a.excerpt}</p>
+        </div>
+      </a>`;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Article — Bramantio Galih Arintoko</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="article">
+
+<header class="site-header">
+  <nav class="navbar wrap">
+    <a class="brand" href="index.html" aria-label="Home">
+      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html" data-page="home">Home</a></li>
+      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="profile.html" data-page="profile">Profile</a></li>
+      <li><a href="project.html" data-page="project">Project</a></li>
+      <li><a href="contact.html" data-page="contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="detail-header article-detail wrap">
+    <a class="back-link" href="article.html">&larr; Back to articles</a>
+    <div id="article-content"></div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <a href="contact.html">Say hello →</a>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const id = getParam("id");
+  const article = ARTICLES.find((a) => a.id === id) || ARTICLES[0];
+  document.title = article.title + " — Bramantio Galih Arintoko";
+
+  document.getElementById("article-content").innerHTML = `
+    <h1>${article.title}</h1>
+    <p class="meta">${article.date}</p>
+    <div class="article-body">${article.body}</div>
+  `;
+</script>
+</body>
+</html>

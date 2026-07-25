@@ -84,25 +84,14 @@ p { margin: 0; }
 
 .brand {
   display: flex;
-  align-items: flex-end;
-  gap: 2px;
+  align-items: center;
   flex-shrink: 0;
 }
 
-.brand-mark {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 20px;
-  line-height: 1;
-  border: 3px solid var(--orange);
-  padding: 6px 8px;
-  color: var(--orange);
-  letter-spacing: 1px;
+.brand-logo {
+  height: 52px;
+  width: auto;
 }
-
-.brand-mark span.t { color: var(--orange); border-left: 3px solid var(--orange); border-right: 3px solid var(--orange); padding: 0 6px; }
 
 .nav-links {
   display: flex;
@@ -540,19 +529,22 @@ p { margin: 0; }
 /* ---------------- Profile ---------------- */
 
 .profile-hero {
-  position: relative;
-  padding: 50px 0 40px;
+  padding: 18px 0 0;
 }
 
 .profile-illustration {
-  position: relative;
-  min-height: 260px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .profile-illustration img {
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: 60px;
+  height: 90px;
+  width: auto;
+  opacity: 0.85;
+}
+
+@media (max-width: 860px) {
+  .profile-illustration { display: none; }
 }
 
 .profile-body {
@@ -560,6 +552,8 @@ p { margin: 0; }
   grid-template-columns: 1.1fr 1fr;
   gap: 50px;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 860px) {

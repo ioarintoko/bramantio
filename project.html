@@ -47,7 +47,7 @@
   PROJECTS.forEach((p) => {
     grid.innerHTML += `
       <a class="card" href="project-detail.html?id=${p.id}">
-        <div class="card-media"><img src="${p.cover}" alt="${p.name}" /></div>
+        <div class="card-media">${cardMediaHTML(p)}</div>
         <div class="card-body">
           <h3>${p.name}</h3>
           <p class="card-stack">${p.stack}</p>

@@ -3,10 +3,91 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Article — Bramantio Galih Arintoko</title>
+<title>Article — Bramantio Galih Muhammad</title>
 <link rel="stylesheet" href="css/style.css" />
+<style>
+  /* --- Tambahan CSS untuk Layout Article Detail --- */
+  
+  /* Latar Belakang Duck */
+  .duck-bg {
+    position: fixed;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  /* Duck Kanan Atas */
+  .duck-top-right {
+    top: 0;
+    right: -20px; /* Sedikit terpotong di tepi seperti pada referensi */
+    width: 250px;
+  }
+  
+  /* Duck Kanan Tengah */
+  .duck-mid-right {
+    top: 55%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 250px;
+  }
+  
+  /* Duck Kiri Bawah (Di-flip agar menghadap ke kanan) */
+  .duck-bottom-left {
+    bottom: -20px;
+    left: -40px;
+    width: 250px;
+    transform: scaleX(-1); 
+  }
+
+  /* Layout Konten Artikel */
+  .article-container {
+    max-width: 768px; /* Membatasi lebar konten agar rapi di tengah */
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .article-hero {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 24px;
+    object-fit: cover;
+  }
+
+  .article-title {
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .article-meta {
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #ffffff;
+  }
+
+  .article-body {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #ffffff;
+  }
+</style>
 </head>
 <body data-page="article">
+
+<!-- Elemen Background Duck -->
+<!-- Pastikan path file src sesuai dengan lokasi file duck Anda, misalnya assets/dark/duck.png -->
+<img src="assets/dark/duck.png" alt="" class="duck-bg duck-top-right" />
+<img src="assets/dark/duck.png" alt="" class="duck-bg duck-mid-right" />
+<img src="assets/dark/duck.png" alt="" class="duck-bg duck-bottom-left" />
 
 <header class="site-header">
   <nav class="navbar wrap">
@@ -16,7 +97,7 @@
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <ul class="nav-links">
       <li><a href="index.html" data-page="home">Home</a></li>
-      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="article.html" data-page="article" class="active">Articles</a></li>
       <li><a href="profile.html" data-page="profile">Profile</a></li>
       <li><a href="project.html" data-page="project">Project</a></li>
       <li><a href="contact.html" data-page="contact">Contact</a></li>
@@ -25,15 +106,18 @@
 </header>
 
 <main>
-  <section class="detail-header article-detail wrap">
-    <a class="back-link" href="article.html">&larr; Back to articles</a>
-    <div id="article-content"></div>
+  <!-- Menambahkan article-container di dalam pembungkus wrap -->
+  <section class="wrap">
+    <div class="article-container">
+      <a class="back-link" href="article.html">&larr; Back to articles</a>
+      <div id="article-content"></div>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <span>&copy; 2026 Bramantio Galih Arintoko</span>
+    <span>&copy; 2026 Bramantio Galih Muhammad</span>
     <a href="contact.html">Say hello →</a>
   </div>
 </footer>
@@ -42,12 +126,14 @@
 <script src="js/main.js"></script>
 <script>
   const id = getParam("id");
-  const article = ARTICLES.find((a) => a.id === id) || ARTICLES[0];
-  document.title = article.title + " — Bramantio Galih Arintoko";
+  const article = (typeof ARTICLES !== 'undefined' && ARTICLES.find((a) => a.id === id)) || ARTICLES[0];
+  document.title = article.title + " — Bramantio Galih Muhammad";
 
+  // Memasukkan gambar thumbnail (hero image) di atas judul artikel
   document.getElementById("article-content").innerHTML = `
-    <h1>${article.title}</h1>
-    <p class="meta">${article.date}</p>
+    ${article.thumb ? `<img class="article-hero" src="${article.thumb}" alt="${article.title}" />` : ''}
+    <h1 class="article-title">${article.title}</h1>
+    <p class="article-meta">${article.date}</p>
     <div class="article-body">${article.body}</div>
   `;
 </script>

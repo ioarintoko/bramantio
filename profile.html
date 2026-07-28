@@ -5,6 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Profile — Bramantio Galih Arintoko</title>
 <link rel="stylesheet" href="css/style.css" />
+<style>
+  /* Tambahan CSS untuk layout dua kolom (Kiri: Lochness, Kanan: Profil) */
+  .profile-layout {
+    display: flex;
+    flex-wrap: wrap; /* Agar responsif di layar kecil */
+    align-items: flex-end; /* Mengatur agar Lochness tetap di posisi bawah/dasar */
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  
+  .profile-illustration {
+    flex: 1;
+    min-width: 300px; /* Batas minimum ukuran gambar */
+  }
+
+  .profile-illustration img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .profile-content {
+    flex: 1;
+    min-width: 300px;
+    padding-top: 24px;
+  }
+</style>
 </head>
 <body data-page="profile">
 
@@ -24,12 +52,14 @@
   </nav>
 </header>
 
-<main>
-  <section class="profile-illustration wrap">
-    <img src="assets/dark/Lochness.png" alt="" />
+<main class="wrap profile-layout">
+  <!-- Kolom Kiri: Ilustrasi Lochness -->
+  <section class="profile-illustration">
+    <img src="assets/dark/Walrus.png" alt="Walrus Illustration" />
   </section>
 
-  <section class="section wrap" style="padding-top:24px;">
+  <!-- Kolom Kanan: Teks dan Foto Profil -->
+  <section class="profile-content">
     <div class="profile-body">
       <div class="profile-text">
         <h2 style="margin-bottom:18px;">About me</h2>
@@ -76,8 +106,8 @@
         </div>
       </div>
 
-      <div class="profile-photo">
-        <img src="assets/foto.jpg" alt="Bramantio Galih Arintoko" />
+      <div class="profile-photo" style="margin-top: 32px;">
+        <img src="assets/foto.jpg" alt="Bramantio Galih Arintoko" style="max-width: 100%; border-radius: 8px;" />
       </div>
     </div>
   </section>

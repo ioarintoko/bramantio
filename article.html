@@ -5,18 +5,143 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Articles — Bramantio Galih Arintoko</title>
 <link rel="stylesheet" href="css/style.css" />
+<style>
+  /* --- Tambahan CSS untuk Layout Artikel --- */
+  
+  .article-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+    position: relative;
+    overflow: hidden; /* Mencegah ilustrasi kanan keluar batas */
+  }
+
+  .left-column {
+    flex: 1;
+    max-width: 55%;
+    z-index: 2;
+  }
+
+  .right-column {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Gaya Search Bar */
+  .search-bar {
+    display: flex;
+    background-color: #d9d9d9;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    height: 45px;
+  }
+
+  .search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0 20px;
+    font-size: 1rem;
+    outline: none;
+    color: #333;
+  }
+
+  .search-bar button {
+    background-color: #7a4b00; /* Menyesuaikan warna tombol search */
+    border: none;
+    width: 60px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-bar button svg {
+    stroke: #ffbb00;
+  }
+
+  /* Gaya Daftar Artikel */
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .article-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .article-row:hover {
+    transform: translateX(10px);
+  }
+
+  .article-row .thumb {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .article-row .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .article-row .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .article-row .content h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .article-row .content .date {
+    margin-top: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  /* Ilustrasi Kanan */
+  .talk-illustration {
+    position: absolute;
+    top: -50px;
+    right: -100px;
+    width: 120%;
+    max-width: 600px;
+    pointer-events: none;
+  }
+</style>
 </head>
 <body data-page="article">
 
 <header class="site-header">
   <nav class="navbar wrap">
     <a class="brand" href="index.html" aria-label="Home">
-      <span class="brand-mark">B<span class="t">R</span><br />M<span class="t">N</span></span>
+      <img src="assets/logo.png" alt="BRMN logo" class="brand-logo" />
     </a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
     <ul class="nav-links">
       <li><a href="index.html" data-page="home">Home</a></li>
-      <li><a href="article.html" data-page="article">Articles</a></li>
+      <li><a href="article.html" data-page="article" class="active">Articles</a></li>
       <li><a href="profile.html" data-page="profile">Profile</a></li>
       <li><a href="project.html" data-page="project">Project</a></li>
       <li><a href="contact.html" data-page="contact">Contact</a></li>
@@ -25,11 +150,30 @@
 </header>
 
 <main>
-  <section class="section wrap" style="padding-top:20px;">
-    <div class="section-head">
-      <h2>Articles</h2>
+  <section class="wrap article-layout">
+    
+    <!-- Kolom Kiri: Search & List -->
+    <div class="left-column">
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search" aria-label="Search articles" />
+        <button type="button" aria-label="Submit search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Article List -->
+      <div class="article-list" id="all-articles"></div>
     </div>
-    <div class="article-list" id="all-articles"></div>
+
+    <!-- Kolom Kanan: Ilustrasi Talk -->
+    <div class="right-column">
+      <img src="assets/dark/Talk.png" alt="Talk Illustration" class="talk-illustration" />
+    </div>
+
   </section>
 </main>
 
@@ -44,17 +188,21 @@
 <script src="js/main.js"></script>
 <script>
   const list = document.getElementById("all-articles");
-  ARTICLES.forEach((a) => {
-    list.innerHTML += `
-      <a class="article-row" href="article-detail.html?id=${a.id}">
-        <div class="thumb"><img src="${a.thumb}" alt="" /></div>
-        <div class="content">
-          <span class="date">${a.date}</span>
-          <h3>${a.title}</h3>
-          <p class="excerpt">${a.excerpt}</p>
-        </div>
-      </a>`;
-  });
+  
+  // Memastikan ARTICLES tersedia dari js/data.js
+  if (typeof ARTICLES !== 'undefined') {
+    ARTICLES.forEach((a) => {
+      // Struktur HTML disesuaikan: Gambar bulat, Judul, lalu Tanggal (tanpa excerpt)
+      list.innerHTML += `
+        <a class="article-row" href="article-detail.html?id=${a.id}">
+          <div class="thumb"><img src="${a.thumb}" alt="${a.title}" /></div>
+          <div class="content">
+            <h3>${a.title}</h3>
+            <span class="date">${a.date}</span>
+          </div>
+        </a>`;
+    });
+  }
 </script>
 </body>
 </html>
